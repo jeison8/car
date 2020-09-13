@@ -125,7 +125,7 @@
 		})
 	});
 
-	var priceInputMax = document.getElementById('price-max'),
+	priceInputMax = document.getElementById('price-max'),
 			priceInputMin = document.getElementById('price-min');
 
 	priceInputMax.addEventListener('change', function(){

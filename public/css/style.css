@@ -619,6 +619,26 @@ textarea.input {
 	03 -> Navigation
 ===========================================================*/
 
+.header-cart{
+  height:30px;
+  width: 30px;
+  background: #D10024;
+  color: #FFF;
+  font-weight: 700;
+  border: none;
+  border-radius: 100px 100px 100px 100px;
+}
+
+.cart-bottom{
+  height:50px;
+  width: 182px;
+  background: #D10024;
+  color: #FFF;
+  font-weight: 700;
+  border: none;
+  margin-bottom: 4px;
+}
+
 #navigation {
   background: #FFF;
   border-bottom: 2px solid #E4E7ED;

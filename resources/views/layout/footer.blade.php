@@ -1,37 +1,3 @@
-<!-- NEWSLETTER -->
-<div id="newsletter" class="section">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="newsletter">
-					<p>Sign Up for the <strong>NEWSLETTER</strong></p>
-					<form>
-						<input class="input" type="email" placeholder="Enter Your Email">
-						<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-					</form>
-					<ul class="newsletter-follow">
-						<li>
-							<a href="#"><i class="fa fa-facebook"></i></a>
-						</li>
-						<li>
-							<a href="#"><i class="fa fa-twitter"></i></a>
-						</li>
-						<li>
-							<a href="#"><i class="fa fa-instagram"></i></a>
-						</li>
-						<li>
-							<a href="#"><i class="fa fa-pinterest"></i></a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- /NEWSLETTER -->
-
-
-<!-- FOOTER -->
 <footer id="footer">
 	<div class="section">
 		<div class="container">
@@ -98,15 +64,15 @@
 				<div class="col-md-12 text-center">
 					<ul class="footer-payments">
 						<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-						<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-						<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-						<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-						<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+						<!-- <li><a href="#"><i class="fa fa-credit-card"></i></a></li> -->
+<!-- 						<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+ -->						<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+						<!-- <li><a href="#"><i class="fa fa-cc-discover"></i></a></li> -->
 						<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
 					</ul>
 					<span class="copyright">
 						Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos los derechos reservados | Creado por <i class="fa fa-heart-o" aria-hidden="true"></i> 
-						<a href="" target="_blank">Colorlib</a>
+						<a href="" target="_blank">Jeisoft</a>
 					</span>
 				</div>
 			</div>
