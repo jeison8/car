@@ -32,11 +32,11 @@
                                         <h4 class="product-price">${{number_format($product->price)}}</h4>
                                         <del class="product-old-price">${{number_format($product->price + 100000) }}</del>
                                         <div class="product-btns">
-                                            <button class="quick-view"><a href="{{route('store.detail',$product->id)}}"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></a></button>
+                                            <button class="quick-view"><a href="{{route('store.detail',$product->id)}}"><i class="fa fa-eye"></i><span class="tooltipp">ver</span></a></button>
                                         </div>
                                     </div>
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn" onclick="addCart({{$product->id}})"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                        <button class="add-to-cart-btn" onclick="addCart({{$product->id}})"><i class="fa fa-shopping-cart"></i> agregar</button>
                                     </div>
                                 </div>
                             @endforeach

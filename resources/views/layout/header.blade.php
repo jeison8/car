@@ -3,12 +3,44 @@
 	<div id="top-header">
 		<div class="container">
 			<ul class="header-links pull-left">
-				<li><a href="#"><i class="fa fa-phone"></i> +57-3216616287</a></li>
-				<li><a href="#"><i class="fa fa-envelope-o"></i> jeisonhurtado1988@hotmail.com</a></li>
+				<li><a><i class="fa fa-phone"></i> +57-3216616287</a></li>
+				<li><a><i class="fa fa-envelope-o"></i> jeisonhurtado1988@hotmail.com</a></li>
 			</ul>
 			<ul class="header-links pull-right">
 				<!-- <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li> -->
-				<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                    <!-- Authentication Links -->
+                    @guest
+                    	<i class="fa fa-user-o" style="color: #D10024;"></i>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Iniciar sesion</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">Registrarse</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <i class="fa fa-user-o" style="color: #D10024;"></i>{{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" style="color: #333;" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cerrar sesion
+                                    <i class="fa fa-power-off" style="color: #D10024;"></i>
+                                </a>
+                                <a class="dropdown-item" style="color: #333;" href="{{ route('products.index') }}">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Productos
+                                    <i class="fa fa-list" style="color: #D10024;"></i>
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
 			</ul>
 		</div>
 	</div>
@@ -29,15 +61,16 @@
 					<div class="header-search">
 						<form>
 							<select class="input-select">
-								<option value="0">All Categories</option>
-								<option value="1">Category 01</option>
-								<option value="1">Category 02</option>
+								<option value="0">Categorias</option>
+								<option value="1">Categoria 01</option>
 							</select>
-							<input class="input" placeholder="Search here">
-							<button class="search-btn">Search</button>
+							<input class="input" placeholder="Busca aqui">
+							<button class="search-btn">Buscar</button>
 						</form>
 					</div>
 				</div>
+
+				@if(strpos(Request::url(),'/order') == false && strpos(Request::url(),'/shipping-info') == false)
 				<div class="col-md-3 clearfix">
 					<div class="header-ctn">
 						<div class="dropdown">
@@ -67,6 +100,8 @@
 						</div>
 					</div>
 				</div>
+				@endif
+
 			</div>
 		</div>
 	</div>

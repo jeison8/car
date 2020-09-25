@@ -19,6 +19,7 @@
 		<link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="{{asset('css/style.css')}}"/>
+
     </head>
 
 	<body>
@@ -36,7 +37,8 @@
 		<script src="{{asset('js/nouislider.min.js')}}"></script>
 		<script src="{{asset('js/jquery.zoom.min.js')}}"></script>
 		<script src="{{asset('js/main.js')}}"></script>
-		<script src="{{asset('js/functions.js')}}"></script>
+		<script src="{{asset('js/functionsDropDownCart.js')}}"></script>
+		@stack('custom-scripts')
 		@stack('custom-scripts')
 
 	</body>

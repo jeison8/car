@@ -38,7 +38,7 @@ function cartPrint(){
         const table = document.createElement('tr');  
         table.innerHTML = 
           `<td>
-              <img src="${protocol+'//'+host+'/'+article.img}" width="100px">
+              <img src="${protocol+'//'+host+'/'+article.img}" width="200px">
           </td>
           <td>
               <h4 class="product-name">${article.name}</h4>
@@ -89,8 +89,7 @@ function cartPrint(){
             <button class="cart-bottom" onclick="viewOrder()">CREAR ORDEN&nbsp;<i class="fa fa-arrow-circle-right"></i></button>`;
 
       document.getElementById('tablesend').appendChild(tablesend);
-
-    
+ 
   }
 
 }

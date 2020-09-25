@@ -21,8 +21,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        if(strpos($request->server('HTTP_REFERER'),'/order') == true){
+            return redirect()->route('store.shipping-info');
+        }
+
+        return redirect()->route('store.index');
     }
 }
