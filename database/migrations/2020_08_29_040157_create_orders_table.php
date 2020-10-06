@@ -19,7 +19,6 @@ class CreateOrdersTable extends Migration
             $table->bigInteger('price');
             $table->string('products_id');
             $table->integer('requestId');
-            $table->string('processUrl');
             $table->string('status');
             $table->timestamps();
         });

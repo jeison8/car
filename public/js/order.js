@@ -5,10 +5,10 @@ window.onload = function() {
   items = JSON.parse(localStorage.getItem('items')) || 0;
   subtotal = JSON.parse(localStorage.getItem('subtotal')) || 0;
 
-  let department_id = document.getElementById("department").value;
-
-  findCities(department_id);
   detailPrint();
+
+  let department_id = document.getElementById("department").value;
+  findCities(department_id);
 
 }
 

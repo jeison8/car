@@ -15,11 +15,11 @@
 						<br>
 						<div class="form-group">
                             <div class="col-md-6">
-								<h4 class="product-name">Imagen*</h4>	
+								<h4 class="product-name">Imagen</h4>	
 								<input type="file" class="input" name="img" value="">
 								@error('img')
 	                                    <span class="invalid-feedback" role="alert">
-	                                        <strong>{{ $message }}</strong>
+	                                        <strong style="color:#D10024">{{ $message }}</strong>
 	                                    </span>
 	                            @enderror
 							</div>
@@ -28,7 +28,7 @@
 								<input class="input" type="text" name="name" value="{{$product->name}}">
 								@error('name')
 	                                    <span class="invalid-feedback" role="alert">
-	                                        <strong>{{ $message }}</strong>
+	                                        <strong style="color:#D10024">{{ $message }}</strong>
 	                                    </span>
 	                            @enderror
 							</div>
@@ -36,10 +36,10 @@
 						<div class="form-group">
 							<div class="col-md-6">
 								<h4 class="product-name">Precio*</h4>
-								<input class="input" type="text" name="price" value="{{round($product->price)}}">
+								<input class="input" type="text" name="price" value="{{$product->price}}">
 								@error('price')
 	                                    <span class="invalid-feedback" role="alert">
-	                                        <strong>{{ $message }}</strong>
+	                                        <strong style="color:#D10024">{{ $message }}</strong>
 	                                    </span>
 	                            @enderror
                         	</div>
@@ -53,7 +53,7 @@
 	                            </select>
 								@error('category')
 	                                    <span class="invalid-feedback" role="alert">
-	                                        <strong>{{ $message }}</strong>
+	                                        <strong style="color:#D10024">{{ $message }}</strong>
 	                                    </span>
 	                            @enderror	
 	                        </div>	
@@ -64,7 +64,7 @@
 								<textarea class="input" name="detail">{{$product->detail}}"</textarea>
 								@error('detail')
 	                                    <span class="invalid-feedback" role="alert">
-	                                        <strong>{{ $message }}</strong>
+	                                        <strong style="color:#D10024">{{ $message }}</strong>
 	                                    </span>
 	                            @enderror
                         	</div>

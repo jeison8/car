@@ -22,7 +22,7 @@
 							<input class="input" type="text" name="name" value="{{$user->name}}">
 							@error('name')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color:#D10024">{{ $message }}</strong>
                                     </span>
                             @enderror
 						</div>
@@ -31,7 +31,7 @@
 							<input class="input" type="email" name="email" value="{{$user->email}}">
 							@error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color:#D10024">{{ $message }}</strong>
                                     </span>
                             @enderror
 						</div>
@@ -40,7 +40,7 @@
 							<input class="input" type="text" name="document" value="{{$user->document}}">
 							@error('document')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color:#D10024">{{ $message }}</strong>
                                     </span>
                             @enderror
 						</div>
@@ -49,7 +49,7 @@
 							<input class="input" type="text" name="address" value="{{$user->address}}">
 							@error('address')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color:#D10024">{{ $message }}</strong>
                                     </span>
                             @enderror
 						</div>
@@ -63,8 +63,8 @@
                             </select>
 							@error('city')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                        <strong style="color:#D10024">{{ $message }}</strong>
+                                    </span> 
                             @enderror
 						</div>
 						<div class="form-group">
@@ -74,7 +74,7 @@
                             </select>
 							@error('city')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color:#D10024">{{ $message }}</strong>
                                     </span>
                             @enderror
 						</div>
@@ -83,7 +83,7 @@
 							<input class="input" type="tel" name="phone" value="{{ $user->phone }}">
 							@error('phone')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color:#D10024">{{ $message }}</strong>
                                     </span>
                             @enderror
 						</div>	

@@ -106,7 +106,7 @@ class PasarellaController extends Controller
 
             if ($response->isSuccessful()) {
 
-                $request->insertShippingInfo($user,$response->requestId(),$response->processUrl(),$items,$total,$response->status()->status());
+                $request->insertShippingInfo($user,$response->requestId(),$items,$total,$response->status()->status());
 
                 header('Location:'.$response->processUrl());
                 

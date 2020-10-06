@@ -22,7 +22,7 @@
 							<input class="input" type="text" name="name" value="{{$user->name}}">
 							@error('name')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color:#D10024">{{ $message }}</strong>
                                     </span>
                             @enderror
 						</div>
@@ -31,7 +31,7 @@
 							<input class="input" type="email" name="email" value="{{$user->email}}">
 							@error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color:#D10024">{{ $message }}</strong>
                                     </span>
                             @enderror
 						</div>
@@ -40,7 +40,7 @@
 							<input class="input" type="text" name="document" value="{{$user->document}}">
 							@error('document')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color:#D10024">{{ $message }}</strong>
                                     </span>
                             @enderror
 						</div>
@@ -49,13 +49,13 @@
 							<input class="input" type="text" name="address" value="{{$user->address}}">
 							@error('address')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color:#D10024">{{ $message }}</strong>
                                     </span>
                             @enderror
 						</div>
 						<div class="form-group">
 							<h4 class="product-name">Departamento*</h4>
-							<select class="input" name="department" id="department" onchange="findCities(this.value)">
+							<select class="input" name="department" id="department" onchange="findCitiesReorder(this.value)">
                                 	<option value="">Seleccionar...</option>
                                 @foreach ($departments as $department)
                                     <option value="{{ $department->id }}" {{$user->departments_id == $department->id ? 'selected' : ''}}>{{ ucfirst(mb_strtolower($department->name)) }}</option>
@@ -63,7 +63,7 @@
                             </select>
 							@error('city')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color:#D10024">{{ $message }}</strong>
                                     </span>
                             @enderror
 						</div>
@@ -74,7 +74,7 @@
                             </select>
 							@error('city')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color:#D10024">{{ $message }}</strong>
                                     </span>
                             @enderror
 						</div>
@@ -83,7 +83,7 @@
 							<input class="input" type="tel" name="phone" value="{{ $user->phone }}">
 							@error('phone')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color:#D10024">{{ $message }}</strong>
                                     </span>
                             @enderror
 						</div>	

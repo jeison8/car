@@ -28,8 +28,8 @@ class InsertShippingInfoRequest extends FormRequest
         return [
             'name' => 'required|regex:/^[a-zá-úÁ-ÚA-ZñÑ\s<]+$/u|min:2|max:100',            
             'email' => 'required|email|unique:users,email,'.$this->user->id,
-            'document' => 'required|numeric|unique:users|min:10000000|max:9999999999',
-            'address' => 'required|regex:/^[a-zá-úÁ-ÚA-Z0-9ñÑ.,#\s<]+$/u|min:2|max:50',
+            'document' => 'required|numeric|min:10000000|max:9999999999|unique:users,document,'.$this->user->id,
+            'address' => 'required',
             'department' => 'required',
             'city' => 'required',
             'phone' => 'required|numeric|min:1000000|max:99999999999999',
@@ -50,7 +50,6 @@ class InsertShippingInfoRequest extends FormRequest
             'name.regex' => 'los nombres no deben contener caracteres extraños',
             'email.email' => 'el formato de correo es incorrecto',
             'document.numeric' => 'solo admite numeros',
-            'address.regex' => 'formato de direccion invalido',
             'department.required' => 'campo obligatorio.',
             'city.required' => 'campo obligatorio.',
             'phone.numeric' => 'solo admite numeros',
@@ -63,7 +62,7 @@ class InsertShippingInfoRequest extends FormRequest
         ];
     }
 
-    public function insertShippingInfo(User $user,$requestId,$processUrl,$items,$total,$status)
+    public function insertShippingInfo(User $user,$requestId,$items,$total,$status)
     {
 
         $data = $this->validated();
@@ -89,7 +88,6 @@ class InsertShippingInfoRequest extends FormRequest
             'price' => $total,
             'products_id' => json_encode($idProducts),
             'requestId' => $requestId,
-            'processUrl' => $processUrl,
             'status' => $status,
         ]);   
 

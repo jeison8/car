@@ -2,12 +2,12 @@ window.onload = function() {
 
   let department_id = document.getElementById("department").value;
 
-  findCities(department_id);
+  findCitiesReorder(department_id);
 
 }
 
 
-this.findCities = function (id){
+this.findCitiesReorder = function (id){
 
 	let cities_id = document.getElementById("city").value;
 	document.getElementById("city").innerHTML = "";
