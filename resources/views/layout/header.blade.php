@@ -30,9 +30,15 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cerrar sesion
                                     <i class="fa fa-power-off" style="color: #D10024;"></i>
                                 </a>
-                                <a class="dropdown-item" style="color: #333;" href="{{ route('products.index') }}">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Productos
-                                    <i class="fa fa-list" style="color: #D10024;"></i>
+                                @if(Auth::user()->is_admin == 1)
+	                                <a class="dropdown-item" style="color: #333;" href="{{ route('products.index') }}">
+	                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Productos
+	                                    <i class="fa fa-list" style="color: #D10024;"></i>
+	                                </a>
+                                @endif
+                                <a class="dropdown-item" style="color: #333;" href="{{ route('history.index',Auth::user()->id) }}">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pedidos
+                                    <i class="fa fa-shopping-bag" style="color: #D10024;"></i>
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -59,18 +65,21 @@
 
 				<div class="col-md-6">
 					<div class="header-search">
-						<form>
-							<select class="input-select">
-								<option value="0">Categorias</option>
-								<option value="1">Categoria 01</option>
+						<form  method="POST" action="{{ route('store.search') }}" onsubmit="validateSearch(event);">
+							@csrf
+							{{-- strpos(Request::url(),'/') == false ? 'disabled' : '' --}}
+							<select class="input-select" name="categories_id" id="selectCategory">
+								<option value="">Seleccione...</option>
+								<option value="all">Todos</option>
 							</select>
-							<input class="input" placeholder="Busca aqui">
-							<button class="search-btn">Buscar</button>
+							<input class="input" name="find" id="find" placeholder="Busca aqui">
+							<button type="submit" class="search-btn">Buscar</button>
+							</script>
 						</form>
 					</div>
 				</div>
 
-				@if(strpos(Request::url(),'/order') == false && strpos(Request::url(),'/shipping-info') == false)
+				@if(strpos(Request::url(),'/order') == false && strpos(Request::url(),'/shipping-info') == false && strpos(Request::url(),'/re-order') == false)
 				<div class="col-md-3 clearfix">
 					<div class="header-ctn">
 						<div class="dropdown">
@@ -109,3 +118,4 @@
 	{{--@include('layout.navigation')--}}
 
 </header>
+

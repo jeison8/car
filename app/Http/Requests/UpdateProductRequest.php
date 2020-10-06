@@ -26,9 +26,9 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'img' => '',
-            'name' => 'required',
-            'price' => 'required',
+            'img' => 'image|mimes:jpeg,png,jpg',
+            'name' => 'required|regex:/^[a-zá-úÁ-ÚA-ZñÑ\s<]+$/u|min:2|max:100',
+            'price' => 'required|Integer',
             'detail' => 'required',
             'category' => 'required'
         ];
@@ -37,8 +37,14 @@ class UpdateProductRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'El attribute es obligatorio.',
-            'price.required' => 'Añade un attribute al producto',
+            'name.required' => 'campo obligatorio.',
+            'price.required' => 'campo obligatorio.',
+            'detail.required' => 'campo obligatorio.',
+            'category.required' => 'campo obligatorio.',
+
+            'img.image' => 'Debes seleccionar una imagen en jpg o png',
+            'name.regex' => 'los nombres no deben contener caracteres extraños',
+            'price.integer' => 'El precio no debe contener comas ni puntos',
         ];
     }
 

@@ -7,6 +7,7 @@
 	   <div class="row">
       <div class="col-md-12">
         <div class="card card-signin my-5">
+            <a href="{{route('products.create')}}">Crear producto <i class="fa fa-plus" style="color: #D10024;"></i></a>
           <div class="card-body text-center">
             <h4>Lista de Productos</h4>  
             <br>
@@ -31,7 +32,6 @@
           				  <td>{{$product->detail}}</td>
           				  <td>{{$product->category->name}}</td>
           				  <td>
-          				 	  <a href="{{route('products.create')}}"><i class="fa fa-plus" style="color: #333;"></i></a>
           				  	<a href="{{route('products.edit',$product->id)}}"><i class="fa fa-pencil" style="color: #333;"></i></a>
           				  	<a href="{{route('products.destroy',$product->id)}}"><i class="fa fa-trash" style="color: #D10024;"></i></a>
           				  </td>

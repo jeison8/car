@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,13 +13,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('categories')->truncate();
-        // DB::table('products')->truncate();
+        Schema::disableForeignKeyConstraints();
 
-        // $this->call(UserSeeder::class);
+        DB::table('departments')->truncate();
+        DB::table('cities')->truncate();
+        DB::table('users')->truncate();
+        DB::table('categories')->truncate();
+        DB::table('products')->truncate();
+
+        Schema::enableForeignKeyConstraints();
+
+        $this->call(DepartmentSeeder::class);
+        $this->call(CitySeeder::class);
+        $this->call(UserSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(ProductSeeder::class);
-        $this->call(CitySeeder::class);
 
     }
 }

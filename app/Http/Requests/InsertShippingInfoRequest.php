@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\User;
+use App\Order;
 use Illuminate\Foundation\Http\FormRequest;
 
 class InsertShippingInfoRequest extends FormRequest
@@ -25,33 +26,72 @@ class InsertShippingInfoRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required',
-            'address' => 'required',
+            'name' => 'required|regex:/^[a-zá-úÁ-ÚA-ZñÑ\s<]+$/u|min:2|max:100',            
+            'email' => 'required|email|unique:users,email,'.$this->user->id,
+            'document' => 'required|numeric|unique:users|min:10000000|max:9999999999',
+            'address' => 'required|regex:/^[a-zá-úÁ-ÚA-Z0-9ñÑ.,#\s<]+$/u|min:2|max:50',
+            'department' => 'required',
             'city' => 'required',
-            'phone' => 'required'
+            'phone' => 'required|numeric|min:1000000|max:99999999999999',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'El attribute es obligatorio.',
-            'email.required' => 'Añade un attribute al producto',
+            'name.required' => 'campo obligatorio.',
+            'email.required' => 'campo obligatorio.',
+            'document.required' => 'campo obligatorio.',
+            'address.required' => 'campo obligatorio.',
+            'department.required' => 'campo obligatorio.',
+            'city.required' => 'campo obligatorio.',
+            'phone.required' => 'campo obligatorio.',
+
+            'name.regex' => 'los nombres no deben contener caracteres extraños',
+            'email.email' => 'el formato de correo es incorrecto',
+            'document.numeric' => 'solo admite numeros',
+            'address.regex' => 'formato de direccion invalido',
+            'department.required' => 'campo obligatorio.',
+            'city.required' => 'campo obligatorio.',
+            'phone.numeric' => 'solo admite numeros',
+
+            'email.unique' => 'ya existe esta direccion de correo',
+            'document.unique' => 'este numero de identificacion ya existe',
+
+            'phone.min' => 'contiene muy pocos digitos',
+            'phone.max' => 'contiene muchos digitos',
         ];
     }
 
-    public function insertShippingInfo(User $user)
+    public function insertShippingInfo(User $user,$requestId,$processUrl,$items,$total,$status)
     {
+
         $data = $this->validated();
 
-        $user->update([
+        $idProducts = [];
+        foreach ($items as $key => $value) {
+            $idProducts[$key] = $value['sku'];
+        }
+              
+        $response = $user->update([
             'name' => $data['name'],
             'email' => $data['email'],
+            'document' => '1130639818',
             'address' => $data['address'],
+            'departments_id' => $data['department'],
             'cities_id' => $data['city'],
             'phone' => $data['phone'],
-        ]);
+        ]);  
+
+
+        $order = Order::create([
+            'users_id' => $user->id,
+            'price' => $total,
+            'products_id' => json_encode($idProducts),
+            'requestId' => $requestId,
+            'processUrl' => $processUrl,
+            'status' => $status,
+        ]);   
 
     }
 }

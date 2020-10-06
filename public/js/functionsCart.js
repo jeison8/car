@@ -8,6 +8,7 @@ window.onload = function() {
   cartPrint();
   htmlPrint();
   TotalPrint();
+  
 
     if(items > 0){  
       document.getElementById("qty").classList.add('qty');
@@ -102,6 +103,3 @@ function TotalPrint(){
   document.getElementById('total').append(Total);
 
 }
-
-
-

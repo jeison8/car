@@ -13,6 +13,8 @@ window.onload = function() {
 	items = JSON.parse(localStorage.getItem('items')) || 0;
 	subtotal = JSON.parse(localStorage.getItem('subtotal')) || 0;
 
+
+  	allCategories();
 	htmlPrint();
 
   	if(items > 0){	
@@ -192,4 +194,34 @@ function viewCart() {
 function viewOrder() {
 
 	 window.location.href="/order";
+}
+
+function allCategories(){
+
+  $.ajax({
+    url: 'all-Categories',
+    success: function(response) {
+
+    	response.forEach( category => {
+
+			document.getElementById("selectCategory").innerHTML += `<option value='${category['id']}'>${category['name']}</option>`; 
+
+		});
+
+    }
+  });
+
+}
+
+  function validateSearch(event){
+
+	let selectCategory = document.getElementById("selectCategory").value;
+	let find = document.getElementById("find").value;
+
+	if(selectCategory == "" && find == ""){ 
+
+	   	event.preventDefault();
+
+	}
+
 }

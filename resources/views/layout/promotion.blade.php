@@ -7,31 +7,31 @@
 						<li>
 							<div>
 								<h3>02</h3>
-								<span>Days</span>
+								<span>Dias</span>
 							</div>
 						</li>
 						<li>
 							<div>
 								<h3>10</h3>
-								<span>Hours</span>
+								<span>horas</span>
 							</div>
 						</li>
 						<li>
 							<div>
 								<h3>34</h3>
-								<span>Mins</span>
+								<span>Minutos</span>
 							</div>
 						</li>
 						<li>
 							<div>
 								<h3>60</h3>
-								<span>Secs</span>
+								<span>segundos</span>
 							</div>
 						</li>
 					</ul>
-					<h2 class="text-uppercase">hot deal this week</h2>
-					<p>New Collection Up to 50% OFF</p>
-					<a class="primary-btn cta-btn" href="#">Shop now</a>
+					<h2 class="text-uppercase">gran oferta esta semana</h2>
+					<p>Nuevos productos a 50% de descuento</p>
+					<a class="primary-btn cta-btn" href="{{route('store.detail',$accessories[2]['id'])}}">Comprar ahora</a>
 				</div>
 			</div>
 		</div>
