@@ -42,8 +42,7 @@ class InsertProductRequest extends FormRequest
 
     public function insertProduct($request)
     {
-
-        $path = Storage::disk('public')->put('img',$request->file('img'));
+        $path = Storage::disk('public')->put('img', $request->file('img'));
 
         Product::create([
             'img' => $path,
@@ -52,6 +51,5 @@ class InsertProductRequest extends FormRequest
             'detail' => $request->detail,
             'categories_id' => $request->category,
         ]);
-
     }
 }

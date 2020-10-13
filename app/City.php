@@ -8,4 +8,3 @@ class City extends Model
 {
     protected $fillable = ['departments_id','name'];
 }
-

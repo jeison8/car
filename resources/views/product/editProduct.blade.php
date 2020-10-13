@@ -1,6 +1,6 @@
-@extends('layout.layout') 
+@extends('layout.layout')
 
-@section('content') 
+@section('content')
 <div class="section">
 	<div class="col-md-12 text-center">
 		<img src="{{asset($product->img)}}" width="200">
@@ -15,7 +15,7 @@
 						<br>
 						<div class="form-group">
                             <div class="col-md-6">
-								<h4 class="product-name">Imagen</h4>	
+								<h4 class="product-name">Imagen</h4>
 								<input type="file" class="input" name="img" value="">
 								@error('img')
 	                                    <span class="invalid-feedback" role="alert">
@@ -55,8 +55,8 @@
 	                                    <span class="invalid-feedback" role="alert">
 	                                        <strong style="color:#D10024">{{ $message }}</strong>
 	                                    </span>
-	                            @enderror	
-	                        </div>	
+	                            @enderror
+	                        </div>
 						</div>
 						<div class="form-group">
 							<div class="col-md-6">

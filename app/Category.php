@@ -10,6 +10,6 @@ class Category extends Model
 
     public function category()
     {
-    	return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }

@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-
-	public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
     }
@@ -19,25 +18,16 @@ class OrderController extends Controller
 
     public function index(User $user)
     {
+        if ($user->is_admin) {
+            $orders = Order::all();
+        } else {
+            $orders = Order::where('users_id', $user->id)->get();
+        }
 
-    	if($user->is_admin == 1){
-
-    		$orders = Order::all();
-
-		}else{
-
-			$orders = Order::where('users_id',$user->id)->get();
-
-		}
-		
-		foreach ($orders as $order) {
-
-			$order->products_id  = json_decode($order->products_id);
-
-		}			
-
-        return view('order.index',compact('orders'));
-
+        foreach ($orders as $order) {
+            $order->products_id  = json_decode($order->products_id);
+        }
+        return view('order.index', compact('orders'));
     }
 
 
@@ -45,11 +35,10 @@ class OrderController extends Controller
     {
         $order->products_id  = json_decode($order->products_id);
 
-        $user = User::where('id',Auth::user()->id)->first();
+        $user = User::where('id', Auth::user()->id)->first();
 
         $departments = Department::orderBy('name', 'ASC')->get();
 
-        return view('order.reOrder',compact('user','departments','order'));
+        return view('order.reOrder', compact('user', 'departments', 'order'));
     }
-
 }

@@ -10,7 +10,6 @@ use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -18,10 +17,10 @@ class ProductController extends Controller
 
 
     public function index()
-    {       
+    {
         $products = Product::paginate(10);
 
-        return view('product.listProducts',compact('products'));
+        return view('product.listProducts', compact('products'));
     }
 
 
@@ -29,7 +28,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
 
-        return view('product.createProduct',compact('categories'));
+        return view('product.createProduct', compact('categories'));
     }
 
 
@@ -45,12 +44,12 @@ class ProductController extends Controller
     {
         $categories = Category::all();
 
-        return view('product.editProduct',compact('categories','product'));
+        return view('product.editProduct', compact('categories', 'product'));
     }
 
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $request->updateProduct($request,$product);
+        $request->updateProduct($request, $product);
 
         return redirect()->route('products.index');
     }
@@ -61,5 +60,4 @@ class ProductController extends Controller
 
         return redirect()->route('products.index');
     }
-
 }

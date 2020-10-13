@@ -48,11 +48,11 @@ class UpdateProductRequest extends FormRequest
         ];
     }
 
-    public function updateProduct($request,$product)
+    public function updateProduct($request, $product)
     {
-        if($request->file('img')){
-            $path = Storage::disk('public')->put('img',$request->file('img'));
-        }else{
+        if ($request->file('img')) {
+            $path = Storage::disk('public')->put('img', $request->file('img'));
+        } else {
             $path = $product->img;
         }
 
@@ -63,6 +63,5 @@ class UpdateProductRequest extends FormRequest
             'detail' => $request->detail,
             'categories_id' => $request->category,
         ]);
-
     }
 }

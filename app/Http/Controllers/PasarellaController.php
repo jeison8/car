@@ -14,7 +14,6 @@ use App\Http\Requests\InsertShippingInfoRequest;
 
 class PasarellaController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -31,20 +30,20 @@ class PasarellaController extends Controller
 
 
     public function InsertshippingInfo(InsertShippingInfoRequest $request, User $user)
-    {       
-        $city = City::where('id',$request->city)->first();
-        $department = Department::where('id',$request->department)->first();
+    {
+        $city = City::where('id', $request->city)->first();
+        $department = Department::where('id', $request->department)->first();
 
-        $total = str_replace(array('.', ','), '' , $request->total);
+        $total = str_replace(array('.', ','), '', $request->total);
 
         $placetopay = $this->connection();
 
         $returnUrl = config('app.url');
-        $reference = 'REFERENCE_'.time(); 
+        $reference = 'REFERENCE_'.time();
 
         $items = [];
         foreach ($request->products as $key => $value) {
-           $items[$key] =   
+            $items[$key] =
             [
                 'sku' => $value[0],
                 'name' => $value[1],
@@ -52,7 +51,6 @@ class PasarellaController extends Controller
                 'price' => $value[2],
             ];
         }
-
 
         $data = [
             'locale' => 'es_CO',
@@ -100,69 +98,49 @@ class PasarellaController extends Controller
             'cancelUrl' => $returnUrl.'/shipping-response?reference='.$reference.'&user='.$user->id,
         ];
 
-
-
         $response = $placetopay->request($data);
 
-            if ($response->isSuccessful()) {
+        if ($response->isSuccessful()) {
+            $request->insertShippingInfo($user, $response->requestId(), $items, $total, $response->status()->status());
 
-                $request->insertShippingInfo($user,$response->requestId(),$items,$total,$response->status()->status());
+            header('Location:'.$response->processUrl());
 
-                header('Location:'.$response->processUrl());
-                
-                exit;
-
-            } else {
-                $response->status()->message();
-            }
-        
+            exit;
+        } else {
+            $response->status()->message();
+        }
     }
 
 
 
     public function ShippingResponse(Request $request)
     {
-
-        $order = Order::where('users_id',$request->user)->get()->last();
+        $order = Order::where('users_id', $request->user)->get()->last();
 
         $placetopay = $this->connection();
 
         $response = $placetopay->query($order->requestId);
-        
+
         if ($response->isSuccessful()) {
-
             if ($response->status()->isApproved()) {
-
-                return $this->responseMessagges($order,$response->status()->status(),'messageApproved','Su pago ha sido satisfactorió, su pedido llegara en 6 días hábiles');
-
+                return $this->responseMessagges($order, $response->status()->status(), 'messageApproved', 'Su pago ha sido satisfactorió, su pedido llegara en 6 días hábiles');
             }
 
-            if($response->status()->isRejected()){
-
-                return $this->responseMessagges($order,$response->status()->status(),'messageRejected','Ha ocurrido un error con su pago, inténtelo  nuevamente');
-
+            if ($response->status()->isRejected()) {
+                return $this->responseMessagges($order, $response->status()->status(), 'messageRejected', 'Ha ocurrido un error con su pago, inténtelo  nuevamente');
             }
-
-
         } else {
-
             print_r($response->status()->message() . "\n");
-
         }
-        
-
     }
 
 
-    public function responseMessagges($order,$statusOrder,$messagesStatus,$messages)
+    public function responseMessagges($order, $statusOrder, $messagesStatus, $messages)
     {
-
         $order->status = $statusOrder;
         $order->save();
-    
-        Session::flash($messagesStatus,$messages);
+
+        Session::flash($messagesStatus, $messages);
         return redirect()->route('store.index');
-
     }
-
 }

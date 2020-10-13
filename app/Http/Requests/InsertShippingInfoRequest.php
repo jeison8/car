@@ -26,7 +26,7 @@ class InsertShippingInfoRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|regex:/^[a-zá-úÁ-ÚA-ZñÑ\s<]+$/u|min:2|max:100',            
+            'name' => 'required|regex:/^[a-zá-úÁ-ÚA-ZñÑ\s<]+$/u|min:2|max:100',
             'email' => 'required|email|unique:users,email,'.$this->user->id,
             'document' => 'required|numeric|min:10000000|max:9999999999|unique:users,document,'.$this->user->id,
             'address' => 'required',
@@ -62,16 +62,15 @@ class InsertShippingInfoRequest extends FormRequest
         ];
     }
 
-    public function insertShippingInfo(User $user,$requestId,$items,$total,$status)
+    public function insertShippingInfo(User $user, $requestId, $items, $total, $status)
     {
-
         $data = $this->validated();
 
         $idProducts = [];
         foreach ($items as $key => $value) {
             $idProducts[$key] = $value['sku'];
         }
-              
+
         $response = $user->update([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -80,8 +79,7 @@ class InsertShippingInfoRequest extends FormRequest
             'departments_id' => $data['department'],
             'cities_id' => $data['city'],
             'phone' => $data['phone'],
-        ]);  
-
+        ]);
 
         $order = Order::create([
             'users_id' => $user->id,
@@ -89,7 +87,6 @@ class InsertShippingInfoRequest extends FormRequest
             'products_id' => json_encode($idProducts),
             'requestId' => $requestId,
             'status' => $status,
-        ]);   
-
+        ]);
     }
 }

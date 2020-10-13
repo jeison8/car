@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        if(strpos($request->server('HTTP_REFERER'),'/order') == true){
+        if (strpos($request->server('HTTP_REFERER'), '/order') == true) {
             return redirect()->route('store.shipping-info');
         }
 
