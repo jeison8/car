@@ -17,7 +17,7 @@ window.onload = function() {
   	allCategories();
 	htmlPrint();
 
-  	if(items > 0){	
+  	if(items > 0){
   		document.getElementById("qty").classList.add('qty');
   	}
 
@@ -25,13 +25,8 @@ window.onload = function() {
 
 function addCart(id) {
 
-	if(id == 0){
-		urlPetition = window.location;
-	}else{
-		urlPetition =`add-cart/${id}`;
-	}
 	$.ajax({
-		url: urlPetition,
+		url: `add-cart/${id}`,
 		success: function(response) {
 
 			const exist = articles.some(article => article.id === response.id);
@@ -79,15 +74,15 @@ function htmlPrint(){
 
 		articles.forEach( article => {
 
-			const row = document.createElement('div');	
-			row.innerHTML = 
+			const row = document.createElement('div');
+			row.innerHTML =
 			`<div class="product-widget">
 				<div class="product-img">
 					<img src="${protocol+'//'+host+'/'+article.img}" alt="">
 				</div>
 				<div class="product-body">
-					<h3 class="product-name">${article.name}<a href="#"></a></h3>
-					<h4 class="product-price">$${new Intl.NumberFormat().format(article.price)}</h4>
+					<h3 class="product-name">${article.nombre}<a href="#"></a></h3>
+					<h4 class="product-price">$${new Intl.NumberFormat().format(article.precio)}</h4>
 				</div>
 				${urlcart.pathname == '/cart' ? '' : `<button class="delete" onclick="destroyCart(${article.id})"><i class="fa fa-close"></i></button>`}
 			</div>`;
@@ -96,7 +91,7 @@ function htmlPrint(){
 
 		});
 
-		const botton = document.createElement('section');	
+		const botton = document.createElement('section');
 		botton.innerHTML = `${urlcart.pathname == '/cart' ? '' : `<button class="btn btn-block" onclick="emptyCart()">Vaciar carrito</button>`}`;
 		document.getElementById("bottonEmpty").appendChild(botton);
 
@@ -104,8 +99,7 @@ function htmlPrint(){
 
 	document.getElementById("items").append(items);
 
-	let subTotal = new Intl.NumberFormat().format(subtotal);
-	document.getElementById("subTotal").append(subTotal);
+	
 
 	if(items > 0){
 		document.getElementById("qty").classList.add('qty');
@@ -204,7 +198,7 @@ function allCategories(){
 
     	response.forEach( category => {
 
-			document.getElementById("selectCategory").innerHTML += `<option value='${category['id']}'>${category['name']}</option>`; 
+			document.getElementById("selectCategory").innerHTML += `<option value='${category['id']}'>${category['name']}</option>`;
 
 		});
 
@@ -218,7 +212,7 @@ function allCategories(){
 	let selectCategory = document.getElementById("selectCategory").value;
 	let find = document.getElementById("find").value;
 
-	if(selectCategory == "" && find == ""){ 
+	if(selectCategory == "" && find == ""){
 
 	   	event.preventDefault();
 

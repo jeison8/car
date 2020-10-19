@@ -1,33 +1,26 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        Schema::disableForeignKeyConstraints();
 
-        DB::table('departments')->truncate();
-        DB::table('cities')->truncate();
+    	Schema::disableForeignKeyConstraints();
+ 
         DB::table('users')->truncate();
-        DB::table('categories')->truncate();
-        DB::table('products')->truncate();
+        DB::table('vehiculos')->truncate();
 
         Schema::enableForeignKeyConstraints();
 
-        $this->call(DepartmentSeeder::class);
-        $this->call(CitySeeder::class);
         $this->call(UserSeeder::class);
-        $this->call(CategorySeeder::class);
-        $this->call(ProductSeeder::class);
+        $this->call(VehiculoSeeder::class);
 
     }
 }

@@ -28,9 +28,9 @@
 					<div class="footer">
 						<h3 class="footer-title">Categorias</h3>
 						<ul class="footer-links">
-							<li><a>Laptops</a></li>
+							<li><a>Autos</a></li>
 							<li><a>Accesorios</a></li>
-							<li><a>Celulares</a></li>
+							<li><a>Marcas</a></li>
 						</ul>
 					</div>
 				</div>

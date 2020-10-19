@@ -26,19 +26,26 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" style="color: #333;" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cerrar sesion
-                                    <i class="fa fa-power-off" style="color: #D10024;"></i>
-                                </a>
-                                @if(Auth::user()->is_admin == 1)
-	                                <a class="dropdown-item" style="color: #333;" href="{{ route('products.index') }}">
-	                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Productos
+                              
+                                @if(Auth::user()->is_admin == 1 || Auth::user()->is_admin == 2)
+	                                <a class="dropdown-item" style="color: #333;" href="{{ route('cars.index') }}">
+	                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vehiculos
 	                                    <i class="fa fa-list" style="color: #D10024;"></i>
 	                                </a>
                                 @endif
-                                <a class="dropdown-item" style="color: #333;" href="{{ route('history.index',Auth::user()->id) }}">
+                                @if(Auth::user()->is_admin == 1)
+	                                <a class="dropdown-item" style="color: #333;" href="{{ route('users.index') }}">
+	                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vendedores
+	                                    <i class="fa fa-user" style="color: #D10024;"></i>
+	                                </a>
+								@endif   
+                               {{--  <a class="dropdown-item" style="color: #333;" href="{{ route('history.index',Auth::user()->id) }}">
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pedidos
                                     <i class="fa fa-shopping-bag" style="color: #D10024;"></i>
+                                </a> --}}
+                                <a class="dropdown-item" style="color: #333;" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cerrar sesion
+                                    <i class="fa fa-power-off" style="color: #D10024;"></i>
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -58,16 +65,15 @@
 				<div class="col-md-3">
 					<div class="header-logo">
 						<a href="{{route('store.index')}}" class="logo">
-							<img src="{{asset('img/logo.png')}}" alt="">
+							<img src="{{asset('img/logo.png')}}" width="100" alt="">
 						</a>
 					</div>
 				</div>
 
 				<div class="col-md-6">
 					<div class="header-search">
-						<form  method="POST" action="{{ route('store.search') }}" onsubmit="validateSearch(event);">
+						<form  method="POST" action="{{route('store.search')}}" onsubmit="validateSearch(event);">
 							@csrf
-							{{-- strpos(Request::url(),'/') == false ? 'disabled' : '' --}}
 							<select class="input-select" name="categories_id" id="selectCategory">
 								<option value="">Seleccione...</option>
 								<option value="all">Todos</option>
@@ -90,19 +96,19 @@
 							</a>
 							<div class="cart-dropdown">
 								<div id="articles" class="cart-list">
-									
+
 								</div>
 								<div id="bottonEmpty">
-									
+
 								</div>
-								<div class="cart-summary">	
+								<div class="cart-summary">
 									<small><span id="items"></span> Articulo(s) seleccionado(s)</small>
-									<h5>SUBTOTAL: $<span id="subTotal"></span></h5>
+									<h5><span id="subTotal"></span></h5>
 								</div>
 								<div class="cart-btns" id="cart-btns">
 									@if(strpos(Request::url(),'/cart') == false)
-									<a href="#" onclick="viewCart()">Ver Carrito</a>
-									<a href="#" onclick="viewOrder()">Crear orden&nbsp;<i class="fa fa-arrow-circle-right"></i></a>
+									<a href="#" onclick="viewCart()" style="pointer-events: none;">Ver Carrito</a>
+									<a href="#" onclick="viewOrder()" style="pointer-events: none;">Crear orden&nbsp;<i class="fa fa-arrow-circle-right"></i></a>
 									@endif
 								</div>
 							</div>
@@ -118,4 +124,3 @@
 	{{--@include('layout.navigation')--}}
 
 </header>
-
