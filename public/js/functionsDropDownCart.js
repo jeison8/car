@@ -11,10 +11,7 @@ window.onload = function() {
 
 	articles = JSON.parse(localStorage.getItem('cart')) || [];
 	items = JSON.parse(localStorage.getItem('items')) || 0;
-	subtotal = JSON.parse(localStorage.getItem('subtotal')) || 0;
 
-
-  	allCategories();
 	htmlPrint();
 
   	if(items > 0){
@@ -110,7 +107,6 @@ function htmlPrint(){
 
 	localStorage.setItem('cart',JSON.stringify(articles));
 	localStorage.setItem('items',JSON.stringify(items));
-	localStorage.setItem('subtotal',JSON.stringify(subtotal));
 
 }
 
@@ -151,34 +147,7 @@ function emptyCart(cart){
 	}
 }
 
-function addCartDetail() {
-	let url =window.location;
-	$.ajax({
-		url: url,
-		success: function(response) {
-			alert(response);
-			const exist = articles.some(article => article.id === response.id);
-			if (!exist) {
 
-				items++;
-				articles = [...articles,response];
-
-				articles.forEach (function(article){
-					if(article.id == response.id){
-						subtotal += article.price;
-					}
-			    });
-			}
-
-			htmlPrint();
-
-		},
-		error: function() {
-	        console.log("No se ha podido obtener la información");
-	    }
-	});
-
-}
 
 function viewCart() {
 
@@ -190,24 +159,8 @@ function viewOrder() {
 	 window.location.href="/order";
 }
 
-function allCategories(){
 
-  $.ajax({
-    url: 'all-Categories',
-    success: function(response) {
-
-    	response.forEach( category => {
-
-			document.getElementById("selectCategory").innerHTML += `<option value='${category['id']}'>${category['name']}</option>`;
-
-		});
-
-    }
-  });
-
-}
-
-  function validateSearch(event){
+ function validateSearch(event){
 
 	let selectCategory = document.getElementById("selectCategory").value;
 	let find = document.getElementById("find").value;
@@ -217,5 +170,25 @@ function allCategories(){
 	   	event.preventDefault();
 
 	}
+
+}
+
+function viewOrder(){
+
+	articles = JSON.parse(localStorage.getItem('cart')) || [];
+
+	$.ajax({
+	 	type: "GET",
+      	url: `/store-register`,
+     	data: {'articles': JSON.stringify(articles)},//capturo array 
+		success: function(res) {
+			if(res == 'ok'){
+				alert('se ha registrado la compra');
+				emptyCart();
+			}else{
+				alert('No hay articulos que registrar en la compra');
+			}
+		}
+	});
 
 }

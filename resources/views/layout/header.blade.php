@@ -106,9 +106,9 @@
 									<h5><span id="subTotal"></span></h5>
 								</div>
 								<div class="cart-btns" id="cart-btns">
-									@if(strpos(Request::url(),'/cart') == false)
-									<a href="#" onclick="viewCart()" style="pointer-events: none;">Ver Carrito</a>
-									<a href="#" onclick="viewOrder()" style="pointer-events: none;">Crear orden&nbsp;<i class="fa fa-arrow-circle-right"></i></a>
+									@if(Auth::check())
+									<a href="{{route('store.buy')}}" style="{{Auth::user()->is_admin == 3 ? 'pointer-events: none' : ''}}">Ver ventas</a>
+									<a href="#" onclick="viewOrder()"  style="{{Auth::user()->is_admin == 3 ? 'pointer-events: none' : ''}}">Registrar&nbsp;<i class="fa fa-arrow-circle-right"></i></a>
 									@endif
 								</div>
 							</div>
@@ -121,6 +121,5 @@
 		</div>
 	</div>
 
-	{{--@include('layout.navigation')--}}
 
 </header>

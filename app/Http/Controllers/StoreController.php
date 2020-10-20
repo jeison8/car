@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Venta;
 use App\Vehiculo;
 use Illuminate\Http\Request;
-use Dnetix\Redirection\PlacetoPay;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\InsertShippingInfoRequest;
 
@@ -42,5 +42,32 @@ class StoreController extends Controller
 
         return view('index', compact('cars'));
     }
+
+
+    public function register(Request $request)
+    {
+        $articles = json_decode($request->articles);
+
+        if(!empty($articles)){
+            foreach ($articles as $key => $ids) {
+               Venta::create([
+                 'users_id' => auth()->user()->id,
+                 'vehiculos_id' => $ids->id,
+               ]); 
+            }
+        }else{
+            return 'error';
+        }
+            return 'ok';     
+    }
+
+
+    public function buy()
+    {
+        $ventas = Venta::paginate(10);
+
+        return view('buy', compact('ventas'));
+    }
+
 
 }
